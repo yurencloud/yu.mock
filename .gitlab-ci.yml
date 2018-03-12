@@ -1,0 +1,11 @@
+stages:
+  - deploy
+deploy:
+    stage: deploy
+    script:
+      - npm install
+    only:
+      - master
+      - tags
+    tags:
+      - shell
