@@ -140,6 +140,10 @@ const restaurants = [
   { id: 49, value: '南拳妈妈龙虾盖浇饭', address: '普陀区金沙江路1699号鑫乐惠美食广场A13' },
 ];
 
+router.get('/restaurants', (req, res) => {
+  res.json(restaurants);
+});
+
 router.get('/restaurants/:keyword', (req, res) => {
   const results = restaurants.filter(item => item.value.indexOf(req.params.keyword) > -1);
   res.json(results);
