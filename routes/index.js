@@ -383,6 +383,10 @@ const catalog = [
   },
 ];
 
+function hasChildren(id) {
+  return catalog.findIndex(item => item.pid === id);
+}
+
 router.post('/fetch/cascader', (req, res) => {
   const result = [];
   const pid = req.body.pid;
@@ -397,12 +401,14 @@ router.post('/fetch/cascader', (req, res) => {
   } else if (pid) {
     catalog.forEach((item) => {
       if (item.pid === pid) {
+        if (hasChildren(item.id) !== -1) item.children = [];
         result.push(item);
       }
     });
   } else {
     catalog.forEach((item) => {
       if (item.pid === 0) {
+        if (hasChildren(item.id) !== -1) item.children = [];
         result.push(item);
       }
     });
