@@ -393,7 +393,7 @@ router.post('/fetch/cascader', (req, res) => {
   const gid = req.body.gid;
   if (gid && pid) {
     catalog.forEach((item) => {
-      if (item.pid === id && item.gid === pid) {
+      if (item.pid === pid && item.gid === gid) {
         result.push(item);
       }
     });
