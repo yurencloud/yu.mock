@@ -6,7 +6,7 @@ const fs = require('fs');
 const Random = Mock.Random;
 
 const router = express.Router();
-const upload = multer({ dest: './upload/' });
+const upload = multer({ dest: './public/upload_tmp/' });
 /*
 *
 GET /zoos：列出所有动物园
@@ -422,7 +422,7 @@ router.post('/fetch/cascader', (req, res) => {
 router.post('/upload', upload.any(), (req, res, next) => {
   console.log(req.files[0]); // 上传的文件信息
 
-  const destFile = `./upload/${req.files[0].originalname}`;
+  const destFile = `./public/upload/${req.files[0].originalname}`;
   fs.readFile(req.files[0].path, (err, data) => {
     fs.writeFile(destFile, data, (err2) => {
       if (err2) {
