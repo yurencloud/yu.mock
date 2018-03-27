@@ -6,7 +6,7 @@ const fs = require('fs');
 const Random = Mock.Random;
 
 const router = express.Router();
-const upload = multer({ dest: 'upload_tmp/' });
+const upload = multer({ dest: './upload/' });
 /*
 *
 GET /zoos：列出所有动物园
@@ -433,7 +433,7 @@ router.post('/upload', upload.any(), (req, res, next) => {
           filename: req.files[0].originalname,
         };
         console.log(response);
-        res.end(JSON.stringify(response));
+        res.json(response);
       }
     });
   });
