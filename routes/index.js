@@ -6,7 +6,7 @@ const fs = require('fs');
 const Random = Mock.Random;
 
 const router = express.Router();
-const upload = multer({ dest: './public/upload_tmp/' });
+const upload = multer({ dest: './public/upload/' });
 /*
 *
 GET /zoos：列出所有动物园
