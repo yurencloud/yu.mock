@@ -429,8 +429,9 @@ router.post('/upload', upload.any(), (req, res, next) => {
         console.log(err2);
       } else {
         const response = {
-          message: '文件上传成功 success',
+          message: '文件上传成功',
           filename: req.files[0].originalname,
+          path: `/upload/${req.files[0].originalname}`,
         };
         console.log(response);
         res.json(response);
