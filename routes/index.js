@@ -444,29 +444,35 @@ router.post('/upload', upload.any(), (req, res, next) => {
 // 上传多个文件
 router.post('/uploads', upload.any(), (req, res, next) => {
   const responses = [];
-  console.log(req.files);
-  req.files.forEach((file) => {
-    console.log(file); // 上传的文件信息
-    const destFile = `./public/upload/${file.originalname}`;
-    fs.readFile(file.path, (err, data) => {
-      fs.writeFile(destFile, data, (err2) => {
-        if (err2) {
-          console.log(err2);
-          res.json(err2);
-        } else {
-          const response = {
-            message: '文件上传成功',
-            filename: req.files[0].originalname,
-            path: `/upload/${req.files[0].originalname}`,
-          };
-          responses.push(response);
-          console.log(response);
-        }
+  const files = req.files;
+
+  console.log(files);
+
+  const result = new Promise((resolve, reject) => {
+    files.map((file) => {
+      fs.readFile(file.path, (err, data) => {
+        fs.writeFile(`./public/upload/${file.originalname}`, data, (err2, data) => {
+          if (err2) {
+            reject(err2);
+          } else {
+            const response = {
+              message: '文件上传成功',
+              filename: req.files[0].originalname,
+              path: `/upload/${req.files[0].originalname}`,
+            };
+            responses.push(response);
+            console.log(response);
+          }
+        });
       });
     });
   });
 
-  res.json(responses);
+  result.then(() => {
+    res.json(responses);
+  }).catch((err) => {
+    res.json(err);
+  });
 });
 
 
