@@ -444,6 +444,7 @@ router.post('/upload', upload.any(), (req, res, next) => {
 // 上传多个文件
 router.post('/uploads', upload.any(), (req, res, next) => {
   const responses = [];
+  console.log(req.files);
   req.files.forEach((file) => {
     console.log(file); // 上传的文件信息
     const destFile = `./public/upload/${file.originalname}`;
