@@ -433,6 +433,7 @@ router.post('/upload', upload.any(), (req, res, next) => {
           message: '文件上传成功',
           filename: req.files[0].originalname,
           path: `/upload/${req.files[0].originalname}`,
+          status: 1,
         };
         console.log(response);
         res.json(response);
@@ -466,7 +467,7 @@ router.post('/uploads', upload.any(), (req, res, next) => {
     });
   });
 
-  res.json(req.files);
+  res.json({ status: 1, files: req.files });
 });
 
 
