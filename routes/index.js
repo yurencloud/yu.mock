@@ -1,10 +1,12 @@
 const express = require('express');
 const Mock = require('mockjs');
+const multer = require('multer');
+const fs = require('fs');
 
 const Random = Mock.Random;
 
 const router = express.Router();
-
+const upload = multer({ dest: './public/upload/' });
 /*
 *
 GET /zoos：列出所有动物园
@@ -351,6 +353,7 @@ router.get('/cascader', (req, res) => {
   res.json(cascader);
 });
 
+
 const catalog = [
   {
     id: 1, gid: 0, pid: 0, name: '前端',
@@ -415,6 +418,57 @@ router.post('/fetch/cascader', (req, res) => {
   }
 
   res.json(result);
+});
+
+// 上传单个文件
+router.post('/upload', upload.any(), (req, res, next) => {
+  console.log(req.files[0]); // 上传的文件信息
+
+  const destFile = `./public/upload/${req.files[0].originalname}`;
+  fs.readFile(req.files[0].path, (err, data) => {
+    fs.writeFile(destFile, data, (err2) => {
+      if (err2) {
+        console.log(err2);
+      } else {
+        const response = {
+          message: '文件上传成功',
+          filename: req.files[0].originalname,
+          path: `/upload/${req.files[0].originalname}`,
+          status: 1,
+        };
+        console.log(response);
+        res.json(response);
+      }
+    });
+  });
+});
+
+// 上传多个文件
+router.post('/uploads', upload.any(), (req, res, next) => {
+  const responses = [];
+  console.log(req.files);
+  req.files.forEach((file) => {
+    console.log(file); // 上传的文件信息
+    const destFile = `./public/upload/${file.originalname}`;
+    fs.readFile(file.path, (err, data) => {
+      fs.writeFile(destFile, data, (err2) => {
+        if (err2) {
+          console.log(err2);
+          res.json(err2);
+        } else {
+          const response = {
+            message: '文件上传成功',
+            filename: req.files[0].originalname,
+            path: `/upload/${req.files[0].originalname}`,
+          };
+          responses.push(response);
+          console.log(response);
+        }
+      });
+    });
+  });
+
+  res.json({ status: 1, files: req.files });
 });
 
 
