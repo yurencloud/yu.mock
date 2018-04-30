@@ -9,4 +9,4 @@ deploy:
     - rsync -avr ./ $DEPLOY_PATH --exclude '.git'
     - cd $DEPLOY_PATH
     - cnpm install
-    - pm2 restart ./bin/www --name mock
+    - pm2 start ./bin/www --name mock
