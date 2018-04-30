@@ -1,11 +1,11 @@
 stages:
-  - build
+  - deploy
+
 deploy:
-    stage: build
-    script:
-      - npm install
-    only:
-      - master
-      - tags
-    tags:
-      - shell
+  stage: deploy
+  only:
+    - prod
+  script:
+    - cp -r ./ $PATH
+    - cd $PATH
+    - cnpm install
