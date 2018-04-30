@@ -63,6 +63,7 @@ router.get('/equipments', (req, res) => {
     { id: 3, equipment: '冰箱' },
     { id: 4, equipment: '洗衣机' },
     { id: 5, equipment: '电饭煲' },
+    { id: 6, equipment: '电灯' },
   ];
   res.json(data);
 });
