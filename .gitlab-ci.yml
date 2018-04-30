@@ -6,9 +6,8 @@ deploy:
   only:
     - prod
   script:
-    - rsync -avr ./ $DEPLOY_PATH --exclude '.git'
+    - sudo rsync -avr ./ $DEPLOY_PATH --exclude '.git'
     - cd $DEPLOY_PATH
     - cnpm install
     - export PM2_HOME=/root/.pm2
-    - sudo pm2 stop mock
-    - sudo pm2 start ./bin/www --name mock
+    - sudo pm2 startOrRestart ./ecosystem.config.js
