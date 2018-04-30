@@ -7,6 +7,6 @@ deploy:
     - prod
   script:
     - who am i
-    - sudo cp -r ./ $DEPLOY_PATH
+    - cp -r ./ $DEPLOY_PATH
     - cd $DEPLOY_PATH
     - cnpm install
