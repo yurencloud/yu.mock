@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "supervisor ./bin/www"
+    "start": "supervisor -q ./bin/www"
   },
   "dependencies": {
     "blear.node.template": "^1.0.20",
