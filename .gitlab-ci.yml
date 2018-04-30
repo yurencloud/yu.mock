@@ -6,6 +6,6 @@ deploy:
   only:
     - prod
   script:
-    - rsync -avr ./ $DEPLOY_PATH
+    - rsync -avr ./ $DEPLOY_PATH --exclude '.git'
     - cd $DEPLOY_PATH
     - cnpm install
