@@ -6,7 +6,7 @@ deploy:
   only:
     - prod
   script:
-    - who am i
+    - su www
     - cp -r ./ $DEPLOY_PATH
     - cd $DEPLOY_PATH
     - cnpm install
