@@ -6,6 +6,6 @@ deploy:
   only:
     - prod
   script:
-    - cp -r ./ $DEPLOY_PATH
+    - sudo cp -r ./ $DEPLOY_PATH
     - cd $DEPLOY_PATH
     - cnpm install
